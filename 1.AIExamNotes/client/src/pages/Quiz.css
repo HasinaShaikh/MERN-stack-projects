@@ -1,0 +1,404 @@
+/* =========================
+   QUIZ PAGE
+========================= */
+
+.quiz-page {
+  min-height: 100vh;
+  background: #080612;
+  color: #ffffff;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.quiz-header {
+  min-height: 72px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  background: #0d0a18;
+  border-bottom: 1px solid #28223a;
+}
+
+.quiz-header button {
+  border: 1px solid #302641;
+  background: #120e1d;
+  color: #af89ec;
+  padding: 9px 13px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.quiz-header button:hover {
+  color: #ffffff;
+  border-color: #9c70dd;
+  background: #181126;
+}
+
+.quiz-header h1 {
+  margin: 0;
+  font-size: 25px;
+  color: #a587ff;
+}
+
+.quiz-header p {
+  margin: 4px 0 0;
+  color: #8e889d;
+  font-size: 17px;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.quiz-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 25px;
+}
+
+
+/* =========================
+   START QUIZ
+========================= */
+
+.quiz-start {
+  text-align: center;
+  padding: 55px 30px;
+  background: #11101b;
+  border: 1px solid #2c263e;
+  border-radius: 16px;
+}
+
+.quiz-start h2 {
+  margin: 0 0 10px;
+  font-size: 28px;
+}
+
+.quiz-start p {
+  color: #9b95a8;
+  margin: 0 0 28px;
+  line-height: 1.6;
+}
+
+.quiz-start button {
+  padding: 12px 24px;
+  background: #7c3aed;
+  color: #ffffff;
+  border: 1px solid #7c3aed;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.quiz-start button:hover {
+  background: #6d28d9;
+  border-color: #6d28d9;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.quiz-loading {
+  text-align: center;
+  padding: 70px 30px;
+  background: #11101b;
+  border: 1px solid #2c263e;
+  border-radius: 16px;
+}
+
+.quiz-loading h2 {
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.quiz-loading p {
+  color: #9b95a8;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   QUESTION CARD
+========================= */
+
+.question-card {
+  padding: 30px;
+  background: #11101b;
+  border: 1px solid #2c263e;
+  border-radius: 16px;
+}
+
+.question-number {
+  color: #a77cff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+.question-card h2 {
+  font-size: 21px;
+  line-height: 1.5;
+  margin: 0 0 25px;
+  color: #ffffff;
+}
+
+
+/* =========================
+   OPTIONS
+========================= */
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quiz-option {
+  width: 100%;
+  padding: 15px;
+  text-align: left;
+  background: #171420;
+  color: #d8d4df;
+  border: 1px solid #302a40;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: 0.2s ease;
+}
+
+.quiz-option:hover {
+  border-color: #7049e7;
+  background: #1e1830;
+  color: #ffffff;
+}
+
+.quiz-option.selected {
+  background: #251a3d;
+  border-color: #805cf0;
+  color: #ffffff;
+}
+
+
+/* =========================
+   QUIZ NAVIGATION
+========================= */
+
+.quiz-navigation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  margin-top: 28px;
+}
+
+
+/* Both buttons are exactly equal */
+
+.quiz-navigation .previous-btn,
+.quiz-navigation .next-btn {
+  flex: 1 1 0;
+  width: 50%;
+  min-width: 0;
+  height: 46px;
+  padding: 0 18px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+
+/* =========================
+   PREVIOUS BUTTON
+========================= */
+
+.quiz-navigation .previous-btn {
+  background: #7c3aed;
+  color: #ffffff;
+  border: 1px solid #7c3aed;
+}
+
+.quiz-navigation .previous-btn:hover:not(:disabled) {
+  background: #6d28d9;
+  border-color: #6d28d9;
+}
+
+
+/* Disabled Previous */
+
+.quiz-navigation .previous-btn:disabled {
+  background: #2a2140;
+  color: #817995;
+  border-color: #3a3050;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+
+/* =========================
+   NEXT BUTTON
+========================= */
+
+.quiz-navigation .next-btn {
+  background: #7c3aed;
+  color: #ffffff;
+  border: 1px solid #7c3aed;
+}
+
+.quiz-navigation .next-btn:hover {
+  background: #6d28d9;
+  border-color: #6d28d9;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.quiz-result {
+  text-align: center;
+  padding: 55px 30px;
+  background: #11101b;
+  border: 1px solid #2c263e;
+  border-radius: 16px;
+}
+
+.quiz-result h2 {
+  margin: 0;
+  font-size: 27px;
+  color: #ffffff;
+}
+
+.score {
+  margin: 25px 0;
+  font-size: 52px;
+  font-weight: bold;
+  color: #a77cff;
+}
+
+.quiz-result p {
+  color: #9b95a8;
+  margin-bottom: 25px;
+}
+
+.quiz-result button {
+  padding: 11px 22px;
+  background: #7c3aed;
+  color: #ffffff;
+  border: 1px solid #7c3aed;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.quiz-result button:hover {
+  background: #6d28d9;
+  border-color: #6d28d9;
+}
+
+.quiz-result .back-result {
+  margin-left: 10px;
+  background: #211b2e;
+  border: 1px solid #3b3150;
+}
+
+.quiz-result .back-result:hover {
+  background: #2b2240;
+  border-color: #7c3aed;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .quiz-header {
+    min-height: 65px;
+    padding: 12px 18px;
+    gap: 15px;
+  }
+
+  .quiz-header h1 {
+    font-size: 21px;
+  }
+
+  .quiz-header p {
+    font-size: 14px;
+  }
+
+  .quiz-container {
+    padding: 35px 15px;
+  }
+
+  .question-card {
+    padding: 22px;
+  }
+
+  .question-card h2 {
+    font-size: 18px;
+  }
+
+  .quiz-option {
+    padding: 13px;
+  }
+
+
+  /* Keep Previous + Next on SAME LINE */
+
+  .quiz-navigation {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .quiz-navigation .previous-btn,
+  .quiz-navigation .next-btn {
+    flex: 1 1 0;
+    width: 50%;
+    min-width: 0;
+    height: 44px;
+    padding: 0 8px;
+    font-size: 13px;
+  }
+
+
+  .quiz-result {
+    padding: 40px 20px;
+  }
+
+  .quiz-result button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .quiz-result .back-result {
+    margin-left: 0;
+  }
+}

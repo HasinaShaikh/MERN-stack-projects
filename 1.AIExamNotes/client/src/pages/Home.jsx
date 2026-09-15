@@ -1,266 +1,419 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  FiUploadCloud,
-  FiFileText,
-  FiBookOpen,
+  FiHome,
+  FiGrid,
+  FiCpu,
+  FiHelpCircle,
+  FiLogIn,
   FiZap,
+  FiFileText,
   FiCheckCircle,
+  FiBookOpen,
+  FiBarChart2,
+  FiUploadCloud,
+  FiLayers,
   FiArrowRight,
-  FiPlayCircle,
+  FiShield,
+  FiClock,
+  FiTarget,
+  FiMenu,
+  FiX
 } from "react-icons/fi";
-import { MdAutoAwesome } from "react-icons/md";
 import "./Home.css";
 
 function Home() {
   const navigate = useNavigate();
+  const [openFaq, setOpenFaq] = useState(null);
+  const [mobileMenu, setMobileMenu] = useState(false);
+
+  const goToAuth = () => {
+    navigate("/auth");
+  };
+
+  const faqs = [
+    {
+      question: "What can AI StudyMate do?",
+      answer:
+        "AI StudyMate helps students turn study material into notes, summaries, quizzes and flashcards."
+    },
+    {
+      question: "Can I upload PDF study material?",
+      answer:
+        "Yes. After logging in, you can upload your study PDF from the dashboard."
+    },
+    {
+      question: "Do I need an account?",
+      answer:
+        "Yes. Your account allows your study material and generated resources to stay organized."
+    },
+    {
+      question: "Can I login with Google?",
+      answer:
+        "Yes. AI StudyMate supports Google authentication as well as normal email and password login."
+    }
+  ];
+
+  const closeMobile = () => {
+    setMobileMenu(false);
+  };
 
   return (
     <div className="home">
 
-      {/* ================= NAVBAR ================= */}
-      <nav className="home-navbar">
+      {/* NAVBAR */}
+      <nav className="home-nav">
 
-        <div className="home-logo">
+        <div className="home-logo" onClick={() => window.scrollTo(0, 0)}>
           <div className="logo-icon">
-            <MdAutoAwesome />
+            <FiZap />
           </div>
 
-          <span>
-            AI<span>StudyMate</span>
-          </span>
+          <div className="logo-text">
+            <span>AI</span> StudyMate
+          </div>
         </div>
 
-        <div className="nav-links">
-          <a href="#features">Features</a>
-          <a href="#how-it-works">How It Works</a>
-          <a href="#about">About</a>
-        </div>
+        <div className={`home-nav-links ${mobileMenu ? "mobile-open" : ""}`}>
 
-        <div className="nav-actions">
-          <button
-            className="nav-login"
-            onClick={() => navigate("/auth")}
+          <a
+            href="#home"
+            className="nav-item active"
+            onClick={closeMobile}
           >
+            <FiHome />
+            <span>Home</span>
+          </a>
+
+          <a
+            href="#features"
+            className="nav-item"
+            onClick={closeMobile}
+          >
+            <FiGrid />
+            <span>Features</span>
+          </a>
+
+          <a
+            href="#how"
+            className="nav-item"
+            onClick={closeMobile}
+          >
+            <FiCpu />
+            <span>How It Works</span>
+          </a>
+
+          <a
+            href="#faq"
+            className="nav-item"
+            onClick={closeMobile}
+          >
+            <FiHelpCircle />
+            <span>FAQ</span>
+          </a>
+
+          <button
+            className="mobile-login"
+            onClick={() => {
+              closeMobile();
+              goToAuth();
+            }}
+          >
+            <FiLogIn />
             Login
           </button>
 
-          <button
-            className="nav-signup"
-            onClick={() => navigate("/auth")}
-          >
-            Get Started
-          </button>
         </div>
+
+        <button className="nav-login" onClick={goToAuth}>
+          <FiLogIn />
+          <span>Login</span>
+        </button>
+
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setMobileMenu(!mobileMenu)}
+        >
+          {mobileMenu ? <FiX /> : <FiMenu />}
+        </button>
 
       </nav>
 
-
-      {/* ================= HERO ================= */}
-      <section className="hero">
-
-        <div className="hero-glow glow-one"></div>
-        <div className="hero-glow glow-two"></div>
+      {/* HERO */}
+      <section className="hero" id="home">
 
         <div className="hero-content">
 
-          <div className="ai-badge">
-            <MdAutoAwesome />
-            AI-Powered Learning Assistant
+          <div className="hero-badge">
+            <FiZap />
+            AI POWERED STUDY ASSISTANT
           </div>
 
           <h1>
-            Turn Your PDFs Into
-            <span> Smart Study Notes</span>
+            Turn your study material
+            <span> into smarter learning.</span>
           </h1>
 
           <p>
-            Upload your study material and let AI transform
-            lengthy PDFs into clear, concise and exam-ready
-            notes in seconds.
+            Upload your study material and transform it into
+            easy-to-understand notes, quizzes and flashcards.
+            Study less randomly and prepare more effectively.
           </p>
 
-          <div className="hero-buttons">
+          <div className="hero-actions">
 
             <button
               className="primary-btn"
-              onClick={() => navigate("/notes")}
+              onClick={goToAuth}
             >
-              <FiUploadCloud />
-              Generate AI Notes
+              Get Started
               <FiArrowRight />
             </button>
 
-            <button className="secondary-btn">
-              <FiPlayCircle />
+            <a
+              href="#how"
+              className="secondary-btn"
+            >
               See How It Works
-            </button>
+            </a>
 
           </div>
 
-          <div className="hero-trust">
-            <FiCheckCircle />
-            Fast AI processing
-            <FiCheckCircle />
-            Exam focused
-            <FiCheckCircle />
-            Easy to use
+          <div className="hero-note">
+            <FiShield />
+            Your study experience stays organized in your account.
           </div>
 
         </div>
 
+        {/* AI STUDY GENERATOR PREVIEW */}
+        <div className="study-preview">
 
-        {/* ================= AI PREVIEW ================= */}
-        <div className="hero-preview">
+          <div className="preview-glow"></div>
 
-          <div className="preview-window">
+          <div className="study-top">
 
-            <div className="window-top">
-              <div className="window-dots">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
+            <div>
+              <span className="preview-label">
+                AI STUDY GENERATOR
+              </span>
 
-              <div className="window-title">
-                AI Notes Generator
-              </div>
+              <h3>
+                Turn material into knowledge
+              </h3>
             </div>
 
-            <div className="preview-body">
+            <span className="ai-status">
+              <i></i> AI Ready
+            </span>
 
-              <div className="upload-card">
+          </div>
 
-              
-             <label className="upload-btn">
-  <FiUploadCloud />
-  <input
-    type="file"
-    accept="application/pdf"
-    hidden
-  />
-  Upload your PDF
-</label>
+          <div className="upload-box">
 
-                <p>
-                  Drop your study material here
-                </p>
+            <div className="upload-symbol">
+              <FiUploadCloud />
+            </div>
 
-                <label>
-                  Choose PDF
-                </label>
+            <div className="upload-text">
+              <strong>Upload your PDF</strong>
 
+              <small>
+                Lecture notes, textbook or study material
+              </small>
+            </div>
+
+            <span className="pdf-badge">
+              PDF
+            </span>
+
+          </div>
+
+          <p className="generate-title">
+            What would you like to generate?
+          </p>
+
+          <div className="generate-options">
+
+            <div className="generate-option active">
+
+              <span>
+                <FiFileText />
+              </span>
+
+              <div>
+                <strong>Smart Notes</strong>
+                <small>Summarize important concepts</small>
               </div>
 
-              <div className="ai-processing">
+              <b>✓</b>
 
-                <div className="processing-header">
-                  <MdAutoAwesome />
-                  AI Generated Notes
-                </div>
+            </div>
 
-                <div className="fake-line long"></div>
-                <div className="fake-line medium"></div>
-                <div className="fake-line short"></div>
+            <div className="generate-option">
 
-                <div className="note-box">
-                  <FiCheckCircle />
+              <span>
+                <FiTarget />
+              </span>
 
-                  <div>
-                    <strong>Key Concepts</strong>
-                    <p>
-                      Important concepts extracted from
-                      your study material.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="note-box">
-                  <FiZap />
-
-                  <div>
-                    <strong>Quick Revision</strong>
-                    <p>
-                      Concise points for faster exam preparation.
-                    </p>
-                  </div>
-                </div>
-
+              <div>
+                <strong>Quiz</strong>
+                <small>Practice your understanding</small>
               </div>
 
             </div>
 
+            <div className="generate-option">
+
+              <span>
+                <FiLayers />
+              </span>
+
+              <div>
+                <strong>Flashcards</strong>
+                <small>Revise key information</small>
+              </div>
+
+            </div>
+
+          </div>
+
+          <button
+            className="preview-generate"
+            onClick={goToAuth}
+          >
+            <FiZap />
+            Generate with AI
+          </button>
+
+          <div className="preview-footer">
+            <span>
+              <FiClock />
+              Fast AI processing
+            </span>
+
+            <span>
+              <FiCheckCircle />
+              Organized results
+            </span>
           </div>
 
         </div>
 
       </section>
 
+      {/* INTRO */}
+      <section className="intro">
 
-      {/* ================= FEATURES ================= */}
-      <section className="features-section" id="features">
+        <p>
+          Everything you need for smarter exam preparation
+        </p>
+
+        <div className="intro-items">
+
+          <span>
+            <FiUploadCloud />
+            PDF Learning
+          </span>
+
+          <span>
+            <FiFileText />
+            AI Notes
+          </span>
+
+          <span>
+            <FiTarget />
+            Smart Quizzes
+          </span>
+
+          <span>
+            <FiLayers />
+            Flashcards
+          </span>
+
+          <span>
+            <FiBarChart2 />
+            Progress Tracking
+          </span>
+
+        </div>
+
+      </section>
+
+      {/* FEATURES */}
+      <section
+        className="features-section"
+        id="features"
+      >
 
         <div className="section-heading">
 
-          <div className="small-heading">
-            <MdAutoAwesome />
-            POWERFUL FEATURES
-          </div>
+          <span style={{ fontSize: "28px" }}> FEATURES</span>
 
           <h2>
-            Everything You Need To
-            <span> Study Smarter</span>
+            One workspace.
+            <br />
+            Multiple ways to learn.
           </h2>
 
           <p>
-            AIStudyMate helps you convert your study material
-            into useful exam preparation resources.
+            AI StudyMate brings your study tools together
+            so you can focus on understanding instead of
+            organizing everything manually.
           </p>
 
         </div>
 
+        <div className="feature-grid">
 
-        <div className="features-grid">
-
-          <div className="feature-card">
+          <div className="feature-card large">
 
             <div className="feature-icon">
               <FiFileText />
             </div>
 
-            <h3>PDF to Notes</h3>
+            <h3>AI Notes</h3>
 
             <p>
-              Upload your PDF and automatically generate
-              structured study notes using AI.
+              Turn long study material into concise,
+              structured and revision-friendly notes.
             </p>
 
-            <a href="#how-it-works">
-              Learn more <FiArrowRight />
-            </a>
+            <span className="feature-link">
+              Generate smarter notes <FiArrowRight />
+            </span>
 
           </div>
-
 
           <div className="feature-card">
 
             <div className="feature-icon">
-              <FiZap />
+              <FiTarget />
             </div>
 
-            <h3>AI Summarization</h3>
+            <h3>Practice Quiz</h3>
 
             <p>
-              Convert lengthy chapters into short and
-              easy-to-understand summaries.
+              Test your understanding with questions
+              based on your study material.
             </p>
-
-            <a href="#how-it-works">
-              Learn more <FiArrowRight />
-            </a>
 
           </div>
 
+          <div className="feature-card">
+
+            <div className="feature-icon">
+              <FiLayers />
+            </div>
+
+            <h3>Flashcards</h3>
+
+            <p>
+              Quickly revise definitions, concepts
+              and important points.
+            </p>
+
+          </div>
 
           <div className="feature-card">
 
@@ -268,36 +421,27 @@ function Home() {
               <FiBookOpen />
             </div>
 
-            <h3>Exam Ready Notes</h3>
+            <h3>Study Library</h3>
 
             <p>
-              Get important concepts, definitions and
-              key points designed for quick revision.
+              Keep your generated learning material
+              organized in one place.
             </p>
 
-            <a href="#how-it-works">
-              Learn more <FiArrowRight />
-            </a>
-
           </div>
-
 
           <div className="feature-card">
 
             <div className="feature-icon">
-              <FiCheckCircle />
+              <FiBarChart2 />
             </div>
 
-            <h3>Quick Revision</h3>
+            <h3>Progress</h3>
 
             <p>
-              Save time with concise notes that help you
-              revise important topics quickly.
+              Keep track of your learning activity
+              and revision progress.
             </p>
-
-            <a href="#how-it-works">
-              Learn more <FiArrowRight />
-            </a>
 
           </div>
 
@@ -305,24 +449,23 @@ function Home() {
 
       </section>
 
+      {/* HOW IT WORKS */}
+      <section
+        className="how-section"
+        id="how"
+      >
 
-      {/* ================= HOW IT WORKS ================= */}
-      <section className="how-section" id="how-it-works">
+        <div className="section-heading center">
 
-        <div className="section-heading">
-
-          <div className="small-heading">
-            <MdAutoAwesome />
-            SIMPLE PROCESS
-          </div>
+          <span style={{ fontSize: "28px" }}>HOW IT WORKS</span>
 
           <h2>
-            Study In
-            <span> 3 Easy Steps</span>
+            From PDF to preparation
+            <br />
+            in a few simple steps.
           </h2>
 
         </div>
-
 
         <div className="steps">
 
@@ -332,20 +475,20 @@ function Home() {
               01
             </div>
 
-            <FiUploadCloud />
+            <div className="step-icon">
+              <FiUploadCloud />
+            </div>
 
             <h3>Upload</h3>
 
             <p>
-              Upload your lecture notes, textbook or
-              study PDF.
+              Upload your lecture notes,
+              textbook or study PDF.
             </p>
 
           </div>
 
-
           <div className="step-line"></div>
-
 
           <div className="step">
 
@@ -353,20 +496,20 @@ function Home() {
               02
             </div>
 
-            <MdAutoAwesome />
+            <div className="step-icon">
+              <FiCpu />
+            </div>
 
-            <h3>Let AI Work</h3>
+            <h3>Generate</h3>
 
             <p>
-              Our AI analyzes your document and extracts
-              the most important information.
+              AI processes your material and
+              creates useful learning resources.
             </p>
 
           </div>
 
-
           <div className="step-line"></div>
-
 
           <div className="step">
 
@@ -374,13 +517,15 @@ function Home() {
               03
             </div>
 
-            <FiBookOpen />
+            <div className="step-icon">
+              <FiBookOpen />
+            </div>
 
-            <h3>Start Studying</h3>
+            <h3>Study</h3>
 
             <p>
-              Read your generated notes and prepare
-              for your exams.
+              Revise using notes, quizzes
+              and flashcards.
             </p>
 
           </div>
@@ -389,31 +534,161 @@ function Home() {
 
       </section>
 
+      {/* BENEFITS */}
+      <section className="benefits">
 
-      {/* ================= CTA ================= */}
-      <section className="cta-section">
+        <div className="benefit-content">
 
-        <div className="cta-box">
-
-          <div className="cta-icon">
-            <MdAutoAwesome />
-          </div>
+          <span>WHY AI STUDYMATE?</span>
 
           <h2>
-            Ready To Study
-            <span> Smarter?</span>
+            Spend less time
+            organizing.
+            <br />
+            Spend more time
+            learning.
           </h2>
 
           <p>
-            Upload your first PDF and let AI create
-            your study notes.
+            Instead of switching between different tools,
+            keep your study resources together and focus
+            on your preparation.
           </p>
 
           <button
             className="primary-btn"
-            onClick={() => navigate("/notes")}
+            onClick={goToAuth}
           >
-            Start Generating Notes
+            Start Learning
+            <FiArrowRight />
+          </button>
+
+        </div>
+
+        <div className="benefit-list">
+
+          <div>
+            <span>
+              <FiCheckCircle />
+            </span>
+
+            <div>
+              <strong>Save preparation time</strong>
+              <p>
+                Quickly turn large material into useful resources.
+              </p>
+            </div>
+
+          </div>
+
+          <div>
+            <span>
+              <FiCheckCircle />
+            </span>
+
+            <div>
+              <strong>Learn in different ways</strong>
+              <p>
+                Use notes, quizzes and flashcards for revision.
+              </p>
+            </div>
+
+          </div>
+
+          <div>
+            <span>
+              <FiCheckCircle />
+            </span>
+
+            <div>
+              <strong>Keep everything organized</strong>
+              <p>
+                Access your learning resources from your dashboard.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* FAQ */}
+      <section
+        className="faq-section"
+        id="faq"
+      >
+
+        <div className="section-heading center">
+
+          <span style={{ fontSize: "28px" }}>FAQ</span>
+          <h2  style={{ fontSize: "20px" }}>
+            Questions, answered.
+          </h2>
+
+        </div>
+
+        <div className="faq-list">
+
+          {faqs.map((faq, index) => (
+
+            <div
+              className={`faq-item ${
+                openFaq === index ? "open" : ""
+              }`}
+              key={index}
+            >
+
+              <button
+                onClick={() =>
+                  setOpenFaq(
+                    openFaq === index ? null : index
+                  )
+                }
+              >
+
+                <span>{faq.question}</span>
+
+                <span className="faq-plus">
+                  {openFaq === index ? "−" : "+"}
+                </span>
+
+              </button>
+
+              {openFaq === index && (
+                <p>{faq.answer}</p>
+              )}
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="final-cta">
+
+        <div>
+
+          <span>READY TO STUDY SMARTER?</span>
+
+          <h2>
+            Your next study session
+            can start here.
+          </h2>
+
+          <p>
+            Create your account and start building
+            smarter study resources.
+          </p>
+
+          <button
+            className="primary-btn"
+            onClick={goToAuth}
+          >
+            Get Started Free
             <FiArrowRight />
           </button>
 
@@ -421,24 +696,38 @@ function Home() {
 
       </section>
 
+      {/* FOOTER */}
+      <footer className="footer">
 
-      {/* ================= FOOTER ================= */}
-      <footer className="home-footer">
+        <div className="footer-brand">
 
-        <div className="footer-logo">
-          <div className="logo-icon">
-            <MdAutoAwesome />
-          </div>
+          <h3>
+            <FiZap />
+            AI StudyMate
+          </h3>
 
-          AI<span>StudyMate</span>
+          <p>
+            Your intelligent study companion
+            for better exam preparation.
+          </p>
+
         </div>
 
-        <p>
-          Your intelligent AI-powered study companion.
-        </p>
+        <div className="footer-links">
 
-        <div className="footer-bottom">
-          © 2026 AIStudyMate. All rights reserved.
+          <a href="#home">Home</a>
+          <a href="#features">Features</a>
+          <a href="#how">How It Works</a>
+          <a href="#faq">FAQ</a>
+
+          <button onClick={goToAuth}>
+            Login
+          </button>
+
+        </div>
+
+        <div className="copyright">
+          © 2026 AI StudyMate. All rights reserved.
         </div>
 
       </footer>
